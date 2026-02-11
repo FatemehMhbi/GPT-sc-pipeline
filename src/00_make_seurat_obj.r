@@ -1,0 +1,42 @@
+library(Seurat)
+
+data_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/single_cell_analysis_v0/data/raw_data"
+
+sample_dirs <- list.dirs(data_dir, recursive = FALSE)
+
+seurat_list <- list()
+
+for (s in sample_dirs) {
+  donor_id <- basename(s)
+
+  # DYNAMIC SEARCH: Find where 'matrix.mtx.gz' is hiding inside this donor folder
+  # recursive = TRUE lets us search through all sub-levels
+  matrix_file <- list.files(path = s, 
+                            pattern = "matrix.mtx.gz", 
+                            recursive = TRUE, 
+                            full.names = TRUE)
+
+  if (length(matrix_file) > 0) {
+    # Get the directory name containing that file
+    # We take [1] just in case there are multiple (e.g. raw and filtered)
+    target_dir <- dirname(matrix_file[1])
+    
+    message("Success: Found 10x data for ", donor_id, " in: ", target_dir)
+    
+    counts <- Read10X(data.dir = target_dir)
+    seurat_list[[donor_id]] <- CreateSeuratObject(counts = counts, project = donor_id)
+  } else {
+    warning("Failure: Could not find matrix.mtx.gz inside ", d)
+  }
+}
+
+# Merge all samples into one generic object
+if (length(seurat_list) > 1) {
+  combined_obj <- merge(x = seurat_list[[1]], y = seurat_list[-1], add.cell.ids = names(seurat_list))
+} else {
+  combined_obj <- seurat_list[[1]]
+}
+
+saveRDS(combined_obj, file = paste0(data_dir, "seurat_object.rds"))
+message("Seurat object created and saved successfully at: ", paste0(data_dir, "seurat_object.rds"))
+
