@@ -1,6 +1,6 @@
 library(Seurat)
 
-data_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/single_cell_analysis_v0/data/raw_data"
+data_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/data/raw_data"
 
 sample_dirs <- list.dirs(data_dir, recursive = FALSE)
 

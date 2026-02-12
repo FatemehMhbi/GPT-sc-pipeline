@@ -206,8 +206,8 @@ seurat_pipeline_with_harmony <- function(data_dir, results_dir) {
     
     message("Running pipeline in execution mode...")
   
-    data_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/single_cell_analysis_v0/data/raw_dataseurat_object.rds"
-    results_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/single_cell_analysis_v0/results"
+    data_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/data/raw_dataseurat_object.rds"
+    results_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/results"
 
     if (!dir.exists(results_dir)) {
     dir.create(results_dir)
