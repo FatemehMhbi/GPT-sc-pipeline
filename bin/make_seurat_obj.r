@@ -1,8 +1,15 @@
+#!/usr/bin/env Rscript
 library(Seurat)
+library(optparse)
 
-data_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/data/raw_data"
+option_list <- list(
+  make_option(c("-i", "--input_dir"), type="character", help="Input directory"),
+  make_option(c("-o", "--out_dir"), type="character", help="Output directory")
+)
 
-sample_dirs <- list.dirs(data_dir, recursive = FALSE)
+opt <- parse_args(OptionParser(option_list=option_list))
+
+sample_dirs <- list.dirs(opt$input_dir, recursive = FALSE)
 
 seurat_list <- list()
 
@@ -37,6 +44,5 @@ if (length(seurat_list) > 1) {
   combined_obj <- seurat_list[[1]]
 }
 
-saveRDS(combined_obj, file = paste0(data_dir, "seurat_object.rds"))
-message("Seurat object created and saved successfully at: ", paste0(data_dir, "seurat_object.rds"))
-
+saveRDS(combined_obj, file = paste0(opt$out_dir, "/seurat_object.rds"))
+message("Seurat object created and saved successfully at: ", paste0(opt$out_dir, "/seurat_object.rds"))

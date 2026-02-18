@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 library(ggplot2)
 library(Seurat)
 library(dplyr)
@@ -5,6 +6,7 @@ library(tidyr)
 library(harmony)
 library(Matrix)
 library(optparse)
+library(ROGUE)
 
 
 # Function to identify markers for each cluster at different resolutions and save the results as CSV files
@@ -38,6 +40,7 @@ identify_and_save_markers <- function(obj, results_dir, res) {
     top_10 <- significant_markers %>% group_by(cluster) %>% slice_max(order_by = avg_log2FC, n = 10)
     write.csv(top_10, file = paste0(outpath, "/Top_10_markers_res_", r, ".csv"),row.names = FALSE)
     }
+    return(obj)
 }
 
 # Function to identify clusters for different resolutions and visualize UMAPs for each resolution and batch effects
@@ -192,37 +195,28 @@ seurat_pipeline_with_harmony <- function(data_dir, results_dir) {
         seurat_obj_filtered, 
         file = paste0(results_dir, "/seurat_obj_clustered.rds"))
     message("Saved clustered Seurat object to: ", paste0(results_dir, "/seurat_obj_clustered.rds"))
-    #return(seurat_obj_filtered)
+    return(seurat_obj_filtered)
 }
 
 
 # --- The "Main" Block ---
-#main <- function() {
+main <- function() {
 
-    #option_list <- list(
-    #    make_option(c("-i", "--input"), type="character", help="Input directory")
-    #)
-    #opt <- parse_args(OptionParser(option_list=option_list))
+    option_list <- list(
+    make_option(c("-i", "--input_dir"), type="character", help="Input directory"),
+    make_option(c("-o", "--out_dir"), type="character", help="Output directory")
+    )
     
-    message("Running pipeline in execution mode...")
-  
-    data_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/data/raw_dataseurat_object.rds"
-    results_dir <- "/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/results"
-
-    if (!dir.exists(results_dir)) {
-    dir.create(results_dir)
-    }
-
+    message("Running Seurat pipeline ...")
     # Run the Seurat pipeline with Harmony for batch correction and clustering
-    seurat_pipeline_with_harmony(data_dir, results_dir) 
+    # input_dir should be the path to the raw Seurat object (e.g., data/raw_data/seurat_object.rds)
+    obj = seurat_pipeline_with_harmony(opt$input_dir, opt$out_dir) 
 
-    message("Analysis Complete.")
-#}
+    message("Seurat pipeline analysis Complete.")
+}
 
 
-#main()
-#if (sys.nframe() == 0) {
-#  main()
-#}
-
+if (sys.nframe() == 0) {
+  main()
+}
 

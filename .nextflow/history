@@ -1,0 +1,2 @@
+2026-02-16 14:49:09	1m 31s	gigantic_easley	ERR	e515d29c9809523312172197a04bc6f0	e702a38c-d64c-4540-8088-df43bfbef319	nextflow run main_test.nf
+2026-02-16 14:55:10	28s	irreverent_bardeen	OK	1572c9860b2de53684aeb6a49701faf1	cb7113a2-5d49-46b9-8b34-2303b75a1523	nextflow run main_test.nf

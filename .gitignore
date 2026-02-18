@@ -7,6 +7,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 raw_data/
+work/
 plots/
 results/
 data/
