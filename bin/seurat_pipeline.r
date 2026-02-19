@@ -6,7 +6,9 @@ library(tidyr)
 library(harmony)
 library(Matrix)
 library(optparse)
-library(ROGUE)
+library(miQC)
+library(flexmix)
+
 
 
 # Function to identify markers for each cluster at different resolutions and save the results as CSV files
@@ -108,10 +110,51 @@ process_raw_counts <- function(data_dir, results_dir) {
         height=7)
     
 
-    # Filter the data based on quality control metrics
-    obj_filtered <- subset(
-        obj, 
-        subset = nFeature_RNA > 200 & nFeature_RNA < 2000 & nCount_RNA < 5000 & percent.mt < 5)
+    # Filter the data based on quality control metrics using 
+    # Run miQC
+    # This models the probability that a cell is compromised based on 
+    # the relationship between nFeature_RNA and percent.mt
+    # 1. Define your thresholds
+    min_counts <- 500  # Remove empty droplets/debris
+    # Use median + 3*MAD to remove extreme outliers/doublets
+    max_counts <- median(obj$nCount_RNA) + 3 * mad(obj$nCount_RNA) # Remove extreme outliers/doublets
+
+    # 2. Run miQC (Mito vs Feature model)
+    obj <- RunMiQC(obj, 
+                    percent.mt = "percent.mt", 
+                    nFeature_RNA = "nFeature_RNA", 
+                    posterior.cutoff = 0.75, 
+                    model.slot = "flexmix_model")
+
+    # 3. Combined Filtering Step
+    # We use miQC for the degradation probability AND manual gates for counts
+    obj_filtered <- subset(obj, 
+                        subset = miQC.keep == "keep" & 
+                                    nFeature_RNA > 200 & 
+                                    nCount_RNA > min_counts & 
+                                    nCount_RNA < max_counts)
+
+    # Optional: Visualize the miQC decision boundary
+    pMiQC <- PlotMiQC(obj, color.by = "miQC.probability")
+
+    # Save it using ggsave
+    ggsave(paste0(results_dir, "/miQC_filtering_diagnostic.pdf"), plot = pMiQC, width = 8, height = 6)
+
+    Idents(obj_filtered) <- "orig.ident"
+    VlnPlot_filtered <- VlnPlot(
+        obj_filtered, 
+        features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), 
+        pt.size = 0, 
+        ncol = 3, 
+        raster = FALSE, 
+        layer = "counts") &
+    theme(axis.text.x = element_text(size = 6))
+
+    ggsave(
+        filename = paste0(results_dir, "/vlnplot_qc_metrics_filtered.pdf"), 
+        plot = VlnPlot_filtered, 
+        width = 14, 
+        height=7)
 
     return(obj_filtered)
 }
@@ -201,15 +244,20 @@ seurat_pipeline_with_harmony <- function(data_dir, results_dir) {
 
 # --- The "Main" Block ---
 main <- function() {
-
+    # Command-line argument parsing
+    # input_dir should be the path to the raw Seurat object (e.g., data/raw_data/seurat_object.rds)
+    # The output directory will contain all the results of the Seurat pipeline including UMAP plots, 
+    # marker CSV files, and the final clustered Seurat object.
     option_list <- list(
     make_option(c("-i", "--input_dir"), type="character", help="Input directory"),
     make_option(c("-o", "--out_dir"), type="character", help="Output directory")
     )
-    
+
+    parser <- OptionParser(option_list = option_list)
+    opt <- parse_args(parser)
+
     message("Running Seurat pipeline ...")
     # Run the Seurat pipeline with Harmony for batch correction and clustering
-    # input_dir should be the path to the raw Seurat object (e.g., data/raw_data/seurat_object.rds)
     obj = seurat_pipeline_with_harmony(opt$input_dir, opt$out_dir) 
 
     message("Seurat pipeline analysis Complete.")

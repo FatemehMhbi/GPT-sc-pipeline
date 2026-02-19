@@ -2,6 +2,10 @@
 library(Seurat)
 library(optparse)
 
+# This script reads in the raw count matrices from multiple samples
+# The input directory should contain subdirectories for each sample, and within those, 
+# the 10x Genomics output files (matrix.mtx.gz, features.tsv.gz, barcodes.tsv.gz)
+# The output is a single Seurat object saved as an RDS file for downstream analysis.
 option_list <- list(
   make_option(c("-i", "--input_dir"), type="character", help="Input directory"),
   make_option(c("-o", "--out_dir"), type="character", help="Output directory")

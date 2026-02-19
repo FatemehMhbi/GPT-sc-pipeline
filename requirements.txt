@@ -1,4 +1,0 @@
-pandas
-openai
-python-dotenv
-boto3

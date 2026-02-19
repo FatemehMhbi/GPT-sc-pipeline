@@ -1,138 +1,98 @@
-Feb-16 14:49:08.910 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main_test.nf
-Feb-16 14:49:08.954 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
-Feb-16 14:49:08.974 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/Users/fatemehmohebbi/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
-Feb-16 14:49:08.991 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
-Feb-16 14:49:08.991 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
-Feb-16 14:49:08.993 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
-Feb-16 14:49:09.004 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
-Feb-16 14:49:09.107 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
-Feb-16 14:49:09.128 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/nextflow.config
-Feb-16 14:49:09.134 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/nextflow.config
-Feb-16 14:49:09.150 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
-Feb-16 14:49:09.409 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
-Feb-16 14:49:09.409 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
-Feb-16 14:49:09.420 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /Users/fatemehmohebbi/.nextflow/secrets/store.json
-Feb-16 14:49:09.422 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@5349b246] - activable => nextflow.secret.LocalSecretsProvider@5349b246
-Feb-16 14:49:09.432 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
-Feb-16 14:49:09.441 [main] DEBUG nextflow.cli.CmdRun - Launching `main_test.nf` [gigantic_easley] DSL2 - revision: e515d29c98
-Feb-16 14:49:09.472 [main] DEBUG nextflow.Session - Session UUID: e702a38c-d64c-4540-8088-df43bfbef319
-Feb-16 14:49:09.472 [main] DEBUG nextflow.Session - Run name: gigantic_easley
-Feb-16 14:49:09.472 [main] DEBUG nextflow.Session - Executor pool size: 8
-Feb-16 14:49:09.478 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
-Feb-16 14:49:09.481 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-Feb-16 14:49:09.536 [main] DEBUG nextflow.cli.CmdRun - 
+Feb-18 22:48:32.897 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf --links_file /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/tests/5k_donors_mtx_links_2_samples.txt -resume
+Feb-18 22:48:32.963 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
+Feb-18 22:48:32.980 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/Users/fatemehmohebbi/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
+Feb-18 22:48:33.002 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Feb-18 22:48:33.002 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Feb-18 22:48:33.006 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Feb-18 22:48:33.021 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Feb-18 22:48:33.131 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Feb-18 22:48:33.151 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/nextflow.config
+Feb-18 22:48:33.153 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/nextflow.config
+Feb-18 22:48:33.175 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Feb-18 22:48:33.501 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Feb-18 22:48:33.502 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Feb-18 22:48:33.515 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /Users/fatemehmohebbi/.nextflow/secrets/store.json
+Feb-18 22:48:33.517 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@6ed922e1] - activable => nextflow.secret.LocalSecretsProvider@6ed922e1
+Feb-18 22:48:33.518 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Feb-18 22:48:33.528 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [magical_pike] DSL2 - revision: 1986226eb3
+Feb-18 22:48:33.576 [main] DEBUG nextflow.Session - Session UUID: cb7113a2-5d49-46b9-8b34-2303b75a1523
+Feb-18 22:48:33.576 [main] DEBUG nextflow.Session - Run name: magical_pike
+Feb-18 22:48:33.577 [main] DEBUG nextflow.Session - Executor pool size: 8
+Feb-18 22:48:33.589 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Feb-18 22:48:33.596 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Feb-18 22:48:33.621 [main] DEBUG nextflow.cli.CmdRun - 
   Version: 25.10.4 build 11173
   Created: 10-02-2026 15:17 UTC (07:17 PDT)
   System: Mac OS X 26.3
   Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 20.0.2
   Encoding: UTF-8 (UTF-8)
-  Process: 31574@MacBook-Pro-2.local [127.0.0.1]
-  CPUs: 8 - Mem: 8 GB (88.9 MB) - Swap: 2 GB (1.1 GB)
-Feb-16 14:49:09.549 [main] DEBUG nextflow.Session - Work-dir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work [Mac OS X]
-Feb-16 14:49:09.549 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/bin
-Feb-16 14:49:09.556 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
-Feb-16 14:49:09.562 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
-Feb-16 14:49:09.563 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
-Feb-16 14:49:09.603 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
-Feb-16 14:49:09.608 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
-Feb-16 14:49:09.650 [main] DEBUG nextflow.Session - Session start
-Feb-16 14:49:09.802 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
-Feb-16 14:49:09.877 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Feb-16 14:49:09.878 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Feb-16 14:49:09.883 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
-Feb-16 14:49:09.889 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=8 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
-Feb-16 14:49:09.890 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
-Feb-16 14:49:09.905 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'STAGE_S3_DATA': maxForks=0; fair=false; array=0
-Feb-16 14:49:09.923 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: STAGE_S3_DATA
-Feb-16 14:49:09.924 [main] DEBUG nextflow.Session - Igniting dataflow network (2)
-Feb-16 14:49:09.927 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > STAGE_S3_DATA
-Feb-16 14:49:09.927 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
-  Script_4c8c942451eab66d: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/main_test.nf
-Feb-16 14:49:09.927 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
-Feb-16 14:49:09.927 [main] DEBUG nextflow.Session - Session await
-Feb-16 14:49:11.013 [PathVisitor-1] DEBUG n.plugin.HttpPluginRepository - Registry request: https://registry.nextflow.io/api/v1/plugins/dependencies?plugins=nf-amazon%403.4.4&nextflowVersion=25.10.4
+  Process: 17556@MacBook-Pro-2.local [127.0.0.1]
+  CPUs: 8 - Mem: 8 GB (261.4 MB) - Swap: 3 GB (482.4 MB)
+Feb-18 22:48:33.640 [main] DEBUG nextflow.Session - Work-dir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work [Mac OS X]
+Feb-18 22:48:33.678 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Feb-18 22:48:33.683 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Feb-18 22:48:33.684 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Feb-18 22:48:33.705 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Feb-18 22:48:33.711 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Feb-18 22:48:33.763 [main] DEBUG nextflow.Session - Session start
+Feb-18 22:48:33.979 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Feb-18 22:48:34.056 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-18 22:48:34.056 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-18 22:48:34.061 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Feb-18 22:48:34.068 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=8 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Feb-18 22:48:34.070 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Feb-18 22:48:34.084 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'PREP_DATA': maxForks=0; fair=false; array=0
+Feb-18 22:48:34.124 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Feb-18 22:48:34.124 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-18 22:48:34.124 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'UNTAR_AND_SEURAT': maxForks=0; fair=false; array=0
+Feb-18 22:48:34.126 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: UNTAR_AND_SEURAT, PREP_DATA
+Feb-18 22:48:34.127 [main] DEBUG nextflow.Session - Igniting dataflow network (3)
+Feb-18 22:48:34.131 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > PREP_DATA
+Feb-18 22:48:34.131 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > UNTAR_AND_SEURAT
+Feb-18 22:48:34.131 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_49d3993abfc9cdd1: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/main.nf
+Feb-18 22:48:34.131 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Feb-18 22:48:34.131 [main] DEBUG nextflow.Session - Session await
+Feb-18 22:48:34.182 [Actor Thread 9] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/environment.yml; path=/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/conda/env-7b00d6b4073b72b02fa135f8247ecd2b
+Feb-18 22:48:34.228 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-18 22:48:34.229 [Task submitter] INFO  nextflow.Session - [82/6ec20a] Submitted process > PREP_DATA (1)
+Feb-18 22:53:34.236 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 1; name: PREP_DATA (1); status: RUNNING; exit: -; error: -; workDir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/82/6ec20aa263be8311e292ed95262633]
+Feb-18 22:56:02.715 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: PREP_DATA (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/82/6ec20aa263be8311e292ed95262633]
+Feb-18 22:56:02.717 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Feb-18 22:56:03.868 [Actor Thread 9] DEBUG n.plugin.HttpPluginRepository - Registry request: https://registry.nextflow.io/api/v1/plugins/dependencies?plugins=nf-amazon%403.4.4&nextflowVersion=25.10.4
 - code: 200
-- body: {"plugins":[{"id":"nf-amazon","downloadCount":122332,"downloadGhCount":1438196,"releases":[{"version":"3.4.4","url":"https://registry.nextflow.io/api/v1/plugins/nf-amazon/3.4.4/download/nf-amazon-3.4.4.zip","date":"2026-02-10T15:21:20.535204Z","sha512sum":"76c37dc3b526e6d06b7fb5c171cd0679da4a5f7c6545eb16fba4ca5e7d812c60f555fb7a71718955a93aa02a22fec73b0e220ca0998725a0dbda0333b0f106ac","requires":">=25.09.2-edge","dependsOn":[],"downloadCount":1273,"downloadGhCount":0,"status":"PUBLISHED","spec":null,"description":null}],"projectUrl":"https://github.com/nextflow-io/nf-amazon","provider":"nextflow-io","description":null}]}
-Feb-16 14:49:11.056 [PathVisitor-1] DEBUG nextflow.plugin.PluginUpdater - Installing plugin nf-amazon version: 3.4.4
-Feb-16 14:49:11.062 [PathVisitor-1] INFO  nextflow.plugin.PluginUpdater - Downloading plugin nf-amazon@3.4.4
-Feb-16 14:50:10.955 [PathVisitor-1] INFO  org.pf4j.util.FileUtils - Expanded plugin zip 'nf-amazon-3.4.4.zip' in 'nf-amazon-3.4.4'
-Feb-16 14:50:10.965 [PathVisitor-1] INFO  org.pf4j.AbstractPluginManager - Plugin 'nf-amazon@3.4.4' resolved
-Feb-16 14:50:10.965 [PathVisitor-1] INFO  org.pf4j.AbstractPluginManager - Start plugin 'nf-amazon@3.4.4'
-Feb-16 14:50:10.980 [PathVisitor-1] DEBUG nextflow.plugin.BasePlugin - Plugin started nf-amazon@3.4.4
-Feb-16 14:50:10.990 [PathVisitor-1] DEBUG nextflow.file.FileHelper - > Added 'S3FileSystemProvider' to list of installed providers [s3]
-Feb-16 14:50:10.990 [PathVisitor-1] DEBUG nextflow.file.FileHelper - Started plugin 'nf-amazon' required to handle file: s3://fatemeh-bio-llm-project-data/seurat_project_data/3k/*
-Feb-16 14:50:10.997 [PathVisitor-1] DEBUG nextflow.file.FileHelper - Creating a file system instance for provider: S3FileSystemProvider; config=[secretKey:gU2****, region:us-east-2, accessKey:AKIA2M5K3KPYOMHA3O6C]
-Feb-16 14:50:11.004 [PathVisitor-1] DEBUG nextflow.cloud.aws.config.AwsConfig - AWS S3 config properties: {max_error_retry=5}
-Feb-16 14:50:12.729 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /fatemeh-bio-llm-project-data/seurat_project_data/3k/; pattern: *; options: [:]
-Feb-16 14:50:13.184 [FileTransfer-1] DEBUG nextflow.file.FilePorter - Copying foreign file s3://fatemeh-bio-llm-project-data/seurat_project_data/3k/pbmc3k.h5ad to work dir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/stage-e702a38c-d64c-4540-8088-df43bfbef319/51/852a98f9ee1a42540ff4a7f02861cf/pbmc3k.h5ad
-Feb-16 14:50:13.288 [FileTransfer-1] DEBUG n.cloud.aws.nio.S3FileSystemProvider - S3 download file from=s3://fatemeh-bio-llm-project-data/seurat_project_data/3k/pbmc3k.h5ad to=/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/stage-e702a38c-d64c-4540-8088-df43bfbef319/51/852a98f9ee1a42540ff4a7f02861cf/pbmc3k.h5ad size=24653425
-Feb-16 14:50:13.291 [FileTransfer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'S3TransferManager' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-Feb-16 14:50:15.190 [Actor Thread 6] INFO  nextflow.file.FilePorter - Staging foreign file: s3://fatemeh-bio-llm-project-data/seurat_project_data/3k/pbmc3k.h5ad
-Feb-16 14:50:39.635 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Feb-16 14:50:39.636 [Task submitter] INFO  nextflow.Session - [88/f9b7e1] Submitted process > STAGE_S3_DATA
-Feb-16 14:50:39.670 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: STAGE_S3_DATA; status: COMPLETED; exit: 0; error: -; workDir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/88/f9b7e1b196bf1cc2dd6afd7ea4b60e]
-Feb-16 14:50:39.670 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-Feb-16 14:50:39.690 [TaskFinalizer-1] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
-  task: name=STAGE_S3_DATA; work-dir=/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/88/f9b7e1b196bf1cc2dd6afd7ea4b60e
-  error [nextflow.exception.MissingFileException]: Missing output file(s) `s3_files/*` expected by process `STAGE_S3_DATA` (note: input files are not included in the default matching set)
-Feb-16 14:50:39.709 [TaskFinalizer-1] ERROR nextflow.processor.TaskProcessor - Error executing process > 'STAGE_S3_DATA'
-
-Caused by:
-  Missing output file(s) `s3_files/*` expected by process `STAGE_S3_DATA` (note: input files are not included in the default matching set)
-
-
-Command executed:
-
-  echo "Staging files from s3://fatemeh-bio-llm-project-data/seurat_project_data/3k/ to local data/ folder..."
-
-Command exit status:
-  0
-
-Command output:
-  Staging files from s3://fatemeh-bio-llm-project-data/seurat_project_data/3k/ to local data/ folder...
-
-Work dir:
-  /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/88/f9b7e1b196bf1cc2dd6afd7ea4b60e
-
-Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-Feb-16 14:50:39.713 [TaskFinalizer-1] DEBUG nextflow.Session - Session aborted -- Cause: Missing output file(s) `s3_files/*` expected by process `STAGE_S3_DATA` (note: input files are not included in the default matching set)
-Feb-16 14:50:39.713 [main] DEBUG nextflow.Session - Session await > all processes finished
-Feb-16 14:50:39.724 [TaskFinalizer-1] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=3ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
-Feb-16 14:50:39.771 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
-Feb-16 14:50:39.771 [main] DEBUG nextflow.Session - Session await > all barriers passed
-Feb-16 14:50:39.772 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=3ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
-Feb-16 14:50:39.772 [TaskFinalizer-1] DEBUG nextflow.Session - null
-java.lang.InterruptedException: null
-	at java.base/java.lang.Object.wait0(Native Method)
-	at java.base/java.lang.Object.wait(Object.java:366)
-	at java.base/java.lang.Thread.join(Thread.java:2115)
-	at java.base/java.lang.Thread.join(Thread.java:2191)
-	at nextflow.trace.AnsiLogObserver.onFlowComplete(AnsiLogObserver.groovy:520)
-	at nextflow.Session$_notifyFlowComplete_lambda39.doCall(Session.groovy:1121)
-	at nextflow.Session.notifyEvent(Session.groovy:1151)
-	at nextflow.Session.notifyFlowComplete(Session.groovy:1121)
-	at nextflow.Session.shutdown0(Session.groovy:779)
-	at nextflow.Session.abort(Session.groovy:834)
-	at nextflow.Session.fault(Session.groovy:796)
-	at nextflow.processor.TaskPollingMonitor.finalizeTask(TaskPollingMonitor.groovy:753)
-	at nextflow.processor.TaskPollingMonitor.safeFinalizeTask(TaskPollingMonitor.groovy:736)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
-	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
-	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
-	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
-	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
-	at nextflow.processor.TaskPollingMonitor$_checkTaskStatus_lambda8.doCall(TaskPollingMonitor.groovy:726)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-	at java.base/java.lang.Thread.run(Thread.java:1623)
-Feb-16 14:50:39.925 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
-Feb-16 14:50:39.937 [main] INFO  org.pf4j.AbstractPluginManager - Stop plugin 'nf-amazon@3.4.4'
-Feb-16 14:50:39.937 [main] DEBUG nextflow.plugin.BasePlugin - Plugin stopped nf-amazon
-Feb-16 14:50:39.938 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
+- body: {"plugins":[{"id":"nf-amazon","downloadCount":124913,"downloadGhCount":1439890,"releases":[{"version":"3.4.4","url":"https://registry.nextflow.io/api/v1/plugins/nf-amazon/3.4.4/download/nf-amazon-3.4.4.zip","date":"2026-02-10T15:21:20.535204Z","sha512sum":"76c37dc3b526e6d06b7fb5c171cd0679da4a5f7c6545eb16fba4ca5e7d812c60f555fb7a71718955a93aa02a22fec73b0e220ca0998725a0dbda0333b0f106ac","requires":">=25.09.2-edge","dependsOn":[],"downloadCount":2124,"downloadGhCount":0,"status":"PUBLISHED","spec":null,"description":null}],"projectUrl":"https://github.com/nextflow-io/nf-amazon","provider":"nextflow-io","description":null}]}
+Feb-18 22:56:03.917 [Actor Thread 9] DEBUG nextflow.plugin.PluginUpdater - Installing plugin nf-amazon version: 3.4.4
+Feb-18 22:56:03.934 [Actor Thread 9] INFO  org.pf4j.AbstractPluginManager - Plugin 'nf-amazon@3.4.4' resolved
+Feb-18 22:56:03.934 [Actor Thread 9] INFO  org.pf4j.AbstractPluginManager - Start plugin 'nf-amazon@3.4.4'
+Feb-18 22:56:03.983 [Actor Thread 9] DEBUG nextflow.plugin.BasePlugin - Plugin started nf-amazon@3.4.4
+Feb-18 22:56:03.994 [Actor Thread 9] DEBUG nextflow.file.FileHelper - > Added 'S3FileSystemProvider' to list of installed providers [s3]
+Feb-18 22:56:03.994 [Actor Thread 9] DEBUG nextflow.file.FileHelper - Started plugin 'nf-amazon' required to handle file: s3://fatemeh-bio-llm-project-data/seurat_project_files/data/*.tar.gz
+Feb-18 22:56:04.002 [Actor Thread 9] DEBUG nextflow.file.FileHelper - Creating a file system instance for provider: S3FileSystemProvider; config=[:]
+Feb-18 22:56:04.022 [Actor Thread 9] DEBUG nextflow.cloud.aws.config.AwsConfig - AWS S3 config properties: {max_error_retry=5}
+Feb-18 22:56:07.131 [FileTransfer-1] DEBUG nextflow.file.FilePorter - Copying foreign file s3://fatemeh-bio-llm-project-data/seurat_project_files/data/5k_Human_Donor1_PBMC_3p_gem-x_5k_Human_Donor1_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz to work dir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/stage-cb7113a2-5d49-46b9-8b34-2303b75a1523/5c/160caa6ed66bf83ab85cdc9227269d/5k_Human_Donor1_PBMC_3p_gem-x_5k_Human_Donor1_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz
+Feb-18 22:56:07.131 [FileTransfer-2] DEBUG nextflow.file.FilePorter - Copying foreign file s3://fatemeh-bio-llm-project-data/seurat_project_files/data/5k_Human_Donor2_PBMC_3p_gem-x_5k_Human_Donor2_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz to work dir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/stage-cb7113a2-5d49-46b9-8b34-2303b75a1523/99/c69f6b94e504ba73b1e183420e3128/5k_Human_Donor2_PBMC_3p_gem-x_5k_Human_Donor2_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz
+Feb-18 22:56:07.131 [FileTransfer-3] DEBUG nextflow.file.FilePorter - Local cache found for foreign file s3://fatemeh-bio-llm-project-data/seurat_project_files/data/5k_Human_Donor3_PBMC_3p_gem-x_5k_Human_Donor3_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz at /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/stage-cb7113a2-5d49-46b9-8b34-2303b75a1523/ec/cba7a147dd34cd0272f5ff3e2ee031/5k_Human_Donor3_PBMC_3p_gem-x_5k_Human_Donor3_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz
+Feb-18 22:56:07.131 [FileTransfer-4] DEBUG nextflow.file.FilePorter - Local cache found for foreign file s3://fatemeh-bio-llm-project-data/seurat_project_files/data/5k_Human_Donor4_PBMC_3p_gem-x_5k_Human_Donor4_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz at /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/stage-cb7113a2-5d49-46b9-8b34-2303b75a1523/64/b470798fcd7ba36e8ba269ffd1edde/5k_Human_Donor4_PBMC_3p_gem-x_5k_Human_Donor4_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz
+Feb-18 22:56:07.241 [FileTransfer-2] DEBUG n.cloud.aws.nio.S3FileSystemProvider - S3 download file from=s3://fatemeh-bio-llm-project-data/seurat_project_files/data/5k_Human_Donor2_PBMC_3p_gem-x_5k_Human_Donor2_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz to=/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/stage-cb7113a2-5d49-46b9-8b34-2303b75a1523/99/c69f6b94e504ba73b1e183420e3128/5k_Human_Donor2_PBMC_3p_gem-x_5k_Human_Donor2_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz size=75952591
+Feb-18 22:56:07.245 [FileTransfer-2] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'S3TransferManager' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Feb-18 22:56:07.696 [FileTransfer-1] DEBUG n.cloud.aws.nio.S3FileSystemProvider - S3 download file from=s3://fatemeh-bio-llm-project-data/seurat_project_files/data/5k_Human_Donor1_PBMC_3p_gem-x_5k_Human_Donor1_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz to=/Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/stage-cb7113a2-5d49-46b9-8b34-2303b75a1523/5c/160caa6ed66bf83ab85cdc9227269d/5k_Human_Donor1_PBMC_3p_gem-x_5k_Human_Donor1_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz size=73546522
+Feb-18 22:56:09.143 [Actor Thread 7] INFO  nextflow.file.FilePorter - Staging foreign file: s3://fatemeh-bio-llm-project-data/seurat_project_files/data/5k_Human_Donor1_PBMC_3p_gem-x_5k_Human_Donor1_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz
+Feb-18 22:56:11.157 [Actor Thread 7] INFO  nextflow.file.FilePorter - Staging foreign file: s3://fatemeh-bio-llm-project-data/seurat_project_files/data/5k_Human_Donor2_PBMC_3p_gem-x_5k_Human_Donor2_PBMC_3p_gem-x_count_sample_filtered_feature_bc_matrix.tar.gz
+Feb-18 22:57:17.518 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-18 22:57:17.519 [Task submitter] INFO  nextflow.Session - [88/aa183a] Submitted process > UNTAR_AND_SEURAT
+Feb-18 22:58:29.326 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: UNTAR_AND_SEURAT; status: COMPLETED; exit: 0; error: -; workDir: /Users/fatemehmohebbi/Desktop/My_AI_projects/scGPT-Flow/work/88/aa183a0dd6d87db9abc1a93a8ab30a]
+Feb-18 22:58:29.361 [TaskFinalizer-2] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Feb-18 22:58:29.364 [main] DEBUG nextflow.Session - Session await > all processes finished
+Feb-18 22:58:29.431 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Feb-18 22:58:29.431 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Feb-18 22:58:29.447 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Feb-18 22:58:29.452 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Feb-18 22:58:29.469 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=8m 40s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Feb-18 22:58:29.528 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Feb-18 22:58:29.542 [main] INFO  org.pf4j.AbstractPluginManager - Stop plugin 'nf-amazon@3.4.4'
+Feb-18 22:58:29.542 [main] DEBUG nextflow.plugin.BasePlugin - Plugin stopped nf-amazon
+Feb-18 22:58:29.543 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Feb-18 22:58:29.543 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'S3TransferManager' shutdown completed (hard=false)
+Feb-18 22:58:29.543 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

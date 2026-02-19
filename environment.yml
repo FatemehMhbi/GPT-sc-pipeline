@@ -1,11 +1,34 @@
-name: bio-llm-env
+name: scgpt_flow_env
 channels:
   - conda-forge
+  - bioconda
+  - defaults
 dependencies:
+  # Core Interpreters 
   - python=3.10
+  - r-base=4.4
+  
+  # Python Libraries
+  - boto3
+  - requests
   - pandas
-  - pip
-  - pip:
-      - openai
-      - python-dotenv
-      - boto3
+  - openai
+  - python-dotenv
+  
+  # R Libraries from Conda-Forge/Bioconda
+  - r-seurat=5.4.0
+  - r-remotes
+  - r-seuratwrappers
+  - r-ggplot2
+  - r-dplyr
+  - r-tidyr
+  - r-matrix
+  - r-optparse
+  - r-cluster
+  - r-flexmix
+  - r-harmony
+  - bioconductor-miqc
+  - bioconductor-biocparallel
+  - bioconductor-singlecellexperiment
+  - bioconductor-summarizedexperiment
+  

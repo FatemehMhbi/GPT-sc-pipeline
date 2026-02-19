@@ -1,71 +1,78 @@
 nextflow.enable.dsl=2
 
-process UNTAR_AND_STAGE {
-    tag "${tar_file.simpleName}"
+// 1. Set a default value, but this gets overwritten by your command line input
+params.links_file = "" 
+
+process PREP_DATA {
+    // This tells Nextflow which environment to use
+    conda "${baseDir}/environment.yml"
     
     input:
-    path tar_file
+    path user_file
 
     output:
-    path "${tar_file.simpleName}_extracted", emit: sample_folder
+    path "staging_complete.txt", emit: signal
 
     script:
     """
-    mkdir ${tar_file.simpleName}_extracted
-    tar -xzvf ${tar_file} -C ${tar_file.simpleName}_extracted --strip-components=1
+    python3 ${baseDir}/bin/move_data_to_S3_bucket.py --links_file ${user_file}
     """
 }
 
-process RUN_SEURAT {
-    tag "${data_dir.name}"
-    publishDir "${params.outdir}/seurat_output", mode: 'copy'
+process UNTAR_AND_SEURAT {
+    conda "${projectDir}/environment.yml"
+    publishDir "${params.outdir}", mode: 'copy'
 
     input:
-    path data_dir  // Fixed: Added missing input block to receive the folder
+    // The 'collect' makes this a LIST of all S3 files
+    path all_tar_files 
 
     output:
-    // Fixed: Standardized output to a directory named 'markers' 
-    // so the next process can find the files easily.
-    path "markers/*.csv", emit: marker_files
+    path "seurat_output/*.rds"
 
     script:
     """
-    # Assuming your script is in bin/ and is executable
-    # We pass the directory path to the R script
-    mkdir -p markers
-    seurat_pipeline.R --input_dir ${data_dir} --out_dir markers
-    """
-}
+    mkdir -p total_data_dir
+    mkdir -p seurat_output
 
-process AI_ANNOTATION {
-    tag "${marker_file.baseName}"
-    publishDir "${params.outdir}/annotations", mode: 'copy'
+    # Loop through every tar file and unpack it into its own subfolder
+    for f in ${all_tar_files}; do
+        # Create a folder name based on the filename (removing .tar.gz)
+        dirname=\$(basename \$f .tar.gz)
+        mkdir -p "total_data_dir/\$dirname"
+        
+        # Untar into that specific subfolder
+        tar -xzvf \$f -C "total_data_dir/\$dirname" --strip-components=1
+    done
 
-    input:
-    path marker_file
+    # pointing to the parent directory containing all folders
+    Rscript ${projectDir}/bin/make_seurat_obj.R \
+        --input_dir total_data_dir/ \
+        --out_dir seurat_output/
 
-    output:
-    path "${marker_file.baseName}_annotated.txt"
-
-    script:
-    """
-    # Assuming your script is in bin/ and is executable
-    openai_annotator.py --input ${marker_file} --output ${marker_file.baseName}_annotated.txt
+    # Run Analysis
+    Rscript ${projectDir}/bin/seurat_pipeline.r \
+    --input_dir seurat_output/seurat_object.rds \
+    --out_dir seurat_output/
     """
 }
 
 workflow {
-    // 1. Channel for tar files
-    tars_ch = Channel.fromPath("${params.input_dir}/*.tar.gz")
+    // Error handling if you forget to provide the file
+    if (params.links_file == "") {
+        error "Usage: nextflow run main.nf --links_file <your_file.txt>"
+    }
 
-    // 2. Unzip
-    UNTAR_AND_STAGE(tars_ch)
+    links_ch = Channel.fromPath(params.links_file)
+    PREP_DATA(links_ch)
 
-    // 3. Run Seurat (Fixed: Passed the output of the previous process)
-    RUN_SEURAT(UNTAR_AND_STAGE.out.sample_folder)
+    samples_ch = PREP_DATA.out.signal
+        .collect()
+        .flatMap { _ -> 
+            file("s3://${params.bucket}/seurat_project_files/data/*.tar.gz") 
+        }
+        .collect() // THIS IS KEY: It bundles all files into a single list
 
-    // 4. Run AI Annotation
-    // Fixed: Seurat output is a list of files; flatten() ensures 
-    // each CSV triggers its own Python task.
-    AI_ANNOTATION(RUN_SEURAT.out.marker_files.flatten())
+    UNTAR_AND_SEURAT(samples_ch)
 }
+

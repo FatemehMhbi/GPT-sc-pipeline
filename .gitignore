@@ -1,3 +1,14 @@
+# Nextflow metadata and logs
+.nextflow/
+.nextflow.log*
+nxflog-*
+
+# Execution reports (if you generate them)
+report.html*
+timeline.html*
+trace.txt*
+dag.dot*
+
 .env
 .DS_Store
 .Rhistory

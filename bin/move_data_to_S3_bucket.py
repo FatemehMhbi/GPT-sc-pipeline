@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import boto3
 import requests
-import sys
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 import os
 from dotenv import load_dotenv
+import argparse
 
 load_dotenv()
 
@@ -41,26 +41,27 @@ def fetch_url(url):
     except Exception as e:
         return f"{url},Error"
 
-def main():
-    # Check if the user actually provided a file path
-    if len(sys.argv) < 2:
-        print("Usage: python script.py <input_file>")
-        sys.exit(1)
 
-    file_path = sys.argv[1]  # This catches the path from Nextflow
-    urls = load_urls(file_path)
+# The input is a txt file that contains the URLs of the raw count matrices for each sample. 
+# Each line should be a URL pointing to a .tar.gz file (the 10x Genomics output).
+parser = argparse.ArgumentParser()
+parser.add_argument('--links_file', help="Path to the input links file")
+args = parser.parse_args()
+
+file_path = args.links_file  # This catches the path from Nextflow
+urls = load_urls(file_path)
     
-    with ThreadPoolExecutor(max_workers=15) as executor:
-        results = list(executor.map(fetch_url, urls))
+with ThreadPoolExecutor(max_workers=15) as executor:
+    results = list(executor.map(fetch_url, urls))
         
 
-    if any("Error" in result for result in results):
-        print("Some URLs failed to be processed.")
-        for result in results:
-            if "Error" in result:
-                print(result)
-    else:
-        print("All URLs were successfully processed.")
+if any("Error" in result for result in results):
+    print("Some URLs failed to be processed.")
+    for result in results:
+        if "Error" in result:
+            print(result)
+else:
+    print("All URLs were successfully processed.")
 
-if __name__ == "__main__":
-    main()
+with open("staging_complete.txt", "w") as f:
+    f.write("done")
