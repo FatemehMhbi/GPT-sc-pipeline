@@ -16,9 +16,10 @@ A scalable Nextflow pipeline for staging single-cell genomic data to AWS S3 and 
 
 
 ## 🏗️ Architecture
-The pipeline consists of two main stages:
+The pipeline consists of three main stages:
 1. **Data Staging (Python):** Downloads raw `.tar.gz` matrices from provided links and uploads them to a private AWS S3 bucket.
-2. **Analysis (R/Seurat):** Discovers staged files in S3, downloads and unpacks them locally into a unified directory structure, and generates Seurat objects (`.rds`).
+2. **Analysis (R/Seurat):** Discovers staged files in S3, downloads and unpacks them locally into a unified directory structure, generates Seurat objects (`.rds`), and run Seurat pipeline (saves markers and UMAPs for resolutions 0.1 to 1.0).
+3. **Cell type annotation using OpenAI for the best resolution based on average silhouette width. 
 
 ## 🛠️ Installation & Setup
 
@@ -34,3 +35,5 @@ This project uses a `.env` file to keep sensitive information out of version con
 S3_BUCKET_NAME=your-private-bucket-name
 AWS_ACCESS_KEY_ID=your-key
 AWS_SECRET_ACCESS_KEY=your-secret
+S3_BUCKET_NAME=your_bucket_name
+AWS_DEFAULT_REGION=your_region
