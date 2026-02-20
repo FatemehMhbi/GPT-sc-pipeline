@@ -10,6 +10,7 @@ trace.txt*
 dag.dot*
 
 .env
+.Rapp.history
 .DS_Store
 .Rhistory
 .RData
