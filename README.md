@@ -28,6 +28,10 @@ The pipeline consists of three main stages:
 - [Conda](https://docs.conda.io/en/latest/) or Mamba
 - AWS CLI configured with appropriate permissions
 
+### How to run
+export $(grep -v '^#' .env | xargs)
+nextflow run main.nf --links_file samples_download_links.txt --project_name project_name --tissue tissue_type --species species
+
 ### Environment Configuration
 This project uses a `.env` file to keep sensitive information out of version control. Create a `.env` file in the root directory:
 
@@ -38,7 +42,3 @@ AWS_ACCESS_KEY_ID=your-key
 AWS_SECRET_ACCESS_KEY=your-secret
 S3_BUCKET_NAME=your_bucket_name
 AWS_DEFAULT_REGION=your_region
-
-### How to run
-export $(grep -v '^#' .env | xargs)
-nextflow run main.nf --links_file samples_download_links.txt --project_name project_name --tissue tissue_type --species species 
