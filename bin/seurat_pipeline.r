@@ -6,7 +6,7 @@ library(tidyr)
 library(harmony)
 library(Matrix)
 library(optparse)
-library(miQC)
+ library(mclust)
 library(flexmix)
 
 
@@ -109,36 +109,37 @@ process_raw_counts <- function(data_dir, results_dir) {
         width = 14, 
         height=7)
     
-
     # Filter the data based on quality control metrics using 
-    # Run miQC
-    # This models the probability that a cell is compromised based on 
-    # the relationship between nFeature_RNA and percent.mt
-    # 1. Define your thresholds
+    # Define your thresholds
     min_counts <- 500  # Remove empty droplets/debris
     # Use median + 3*MAD to remove extreme outliers/doublets
     max_counts <- median(obj$nCount_RNA) + 3 * mad(obj$nCount_RNA) # Remove extreme outliers/doublets
 
-    # 2. Run miQC (Mito vs Feature model)
-    obj <- RunMiQC(obj, 
-                    percent.mt = "percent.mt", 
-                    nFeature_RNA = "nFeature_RNA", 
-                    posterior.cutoff = 0.75, 
-                    model.slot = "flexmix_model")
+    # Extract metadata and handle potential scaling issues
+    # Mclust works better if the features are somewhat comparable in scale
+    meta <- obj@meta.data
+    data_for_model <- meta[, c("nFeature_RNA", "percent.mt")]
 
-    # 3. Combined Filtering Step
-    # We use miQC for the degradation probability AND manual gates for counts
+    # Fit Gaussian Mixture Model
+    # We force 2 groups: likely 'Healthy' and 'Damaged/Dead'
+    fit <- Mclust(data_for_model, G = 2, verbose = FALSE)
+
+    # DYNAMICALLY identify the "Good" cluster
+    # We assume the "Good" cluster has the LOWER mean mitochondrial percentage
+    cluster_means <- aggregate(data_for_model$percent.mt, list(fit$classification), mean)
+    good_cluster_id <- cluster_means[which.min(cluster_means$x), "Group.1"]
+
+    # Extract posterior probabilities for the 'Good' cluster
+    # fit$z is a matrix where columns represent the clusters
+    obj$prob_good_quality <- fit$z[, good_cluster_id]
+
+    # Combined Filtering Step
+    # We use the probability AND manual gates for counts
     obj_filtered <- subset(obj, 
-                        subset = miQC.keep == "keep" & 
+                        subset = prob_good_quality > 0.5 & 
                                     nFeature_RNA > 200 & 
                                     nCount_RNA > min_counts & 
                                     nCount_RNA < max_counts)
-
-    # Optional: Visualize the miQC decision boundary
-    pMiQC <- PlotMiQC(obj, color.by = "miQC.probability")
-
-    # Save it using ggsave
-    ggsave(paste0(results_dir, "/miQC_filtering_diagnostic.pdf"), plot = pMiQC, width = 8, height = 6)
 
     Idents(obj_filtered) <- "orig.ident"
     VlnPlot_filtered <- VlnPlot(
@@ -214,7 +215,7 @@ seurat_pipeline_with_harmony <- function(data_dir, results_dir) {
         seurat_obj_filtered, 
         orig.reduction = "pca", 
         new.reduction = "harmony", 
-        group.by.vars = "orig.ident")
+        group.by.vars = "sample")
     message("Completed Harmony batch correction. Proceeding with UMAP and clustering using the Harmony reduction...")
 
     # Run UMAP and FindNeighbors using the Harmony reduction
@@ -230,8 +231,21 @@ seurat_pipeline_with_harmony <- function(data_dir, results_dir) {
         reduction = "harmony", 
         dims = pc_dims)
 
-    seurat_obj_filtered <- identify_clusters_and_visualize_umaps(seurat_obj_filtered, results_dir, seq(0.1, 1.0, by = 0.1)) %>% 
-        identify_and_save_markers(results_dir, seq(0.1, 1.0, by = 0.1))
+    #seurat_obj_filtered <- identify_clusters_and_visualize_umaps(seurat_obj_filtered, results_dir, seq(0.1, 1.0, by = 0.1)) %>% 
+    #    identify_and_save_markers(results_dir, seq(0.1, 1.0, by = 0.1))
+
+    seurat_obj_filtered <- identify_clusters_and_visualize_umaps(
+        seurat_obj_filtered, 
+        results_dir, 
+        seq(0.1, 1.0, by = 0.1)
+    )
+
+    # Don't pipe here—it's safer to be explicit so you don't lose the object.
+    seurat_obj_filtered <- identify_and_save_markers(
+        seurat_obj_filtered, 
+        results_dir, 
+        seq(0.1, 1.0, by = 0.1)
+ )
     
     # Save the final Seurat object 
     saveRDS(

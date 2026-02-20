@@ -18,11 +18,11 @@ dependencies:
   # R Libraries from Conda-Forge/Bioconda
   - r-seurat=5.4.0
   - r-remotes
-  - r-seuratwrappers
   - r-ggplot2
   - r-dplyr
   - r-tidyr
   - r-matrix
+  - r-mclust
   - r-optparse
   - r-cluster
   - r-flexmix
@@ -31,4 +31,5 @@ dependencies:
   - bioconductor-biocparallel
   - bioconductor-singlecellexperiment
   - bioconductor-summarizedexperiment
-  
+  - libxml2 
+  - openssl

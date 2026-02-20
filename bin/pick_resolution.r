@@ -46,6 +46,6 @@ best_res_name <- names(which.max(sil_results))
 # 5. Output ONLY the string for Nextflow/Python
 # Example: "RNA_snn_res.0.6"
 # cat(best_res_name)
-writeLines(as.character(best_res_name), paste0(opt$out_dir, "/picked_resolution_for_annotation.txt"))
 message("Best resolution based on silhouette width: ", best_res_name)
-message("Saved best resolution to: ", paste0(opt$out_dir, "/picked_resolution_for_annotation.txt"))
+writeLines(as.character(tail(strsplit(best_res_name, "res\\.")[[1]], 1)), paste0(opt$out_dir, "/picked_resolution_for_annotation.txt"))
+

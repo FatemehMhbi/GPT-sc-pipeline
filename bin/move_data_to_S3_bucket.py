@@ -6,6 +6,7 @@ from io import BytesIO
 import os
 from dotenv import load_dotenv
 import argparse
+from itertools import repeat
 
 load_dotenv()
 
@@ -20,7 +21,7 @@ def load_urls(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         return [line.strip() for line in f if line.strip()]
 
-def fetch_url(url):
+def fetch_url(url, s3_dir):
     try:
         # 10s timeout is a safe bet for 80 URLs
         print("Downloading data...")
@@ -35,7 +36,7 @@ def fetch_url(url):
         s3 = boto3.client('s3')
         bucket_name = os.getenv("S3_BUCKET_NAME")
 
-        s3.upload_fileobj(data_file, bucket_name, f'seurat_project_files/data/{os.path.basename(url)}')
+        s3.upload_fileobj(data_file, bucket_name, f'{s3_dir}/data/{os.path.basename(url)}')
         print(f"Success! {os.path.basename(url)} is now in S3 bucket")
         return f"{url},Success"
     except Exception as e:
@@ -46,13 +47,14 @@ def fetch_url(url):
 # Each line should be a URL pointing to a .tar.gz file (the 10x Genomics output).
 parser = argparse.ArgumentParser()
 parser.add_argument('--links_file', help="Path to the input links file")
+parser.add_argument('--S3_dir', help="A unique name for the S3 directory to upload the data")
 args = parser.parse_args()
 
 file_path = args.links_file  # This catches the path from Nextflow
 urls = load_urls(file_path)
     
 with ThreadPoolExecutor(max_workers=15) as executor:
-    results = list(executor.map(fetch_url, urls))
+    results = list(executor.map(fetch_url, urls, repeat(args.S3_dir)))
         
 
 if any("Error" in result for result in results):

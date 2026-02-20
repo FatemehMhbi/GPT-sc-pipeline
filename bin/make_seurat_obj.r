@@ -23,9 +23,10 @@ for (s in sample_dirs) {
   # DYNAMIC SEARCH: Find where 'matrix.mtx.gz' is hiding inside this donor folder
   # recursive = TRUE lets us search through all sub-levels
   matrix_file <- list.files(path = s, 
-                            pattern = "matrix.mtx.gz", 
+                            pattern = "matrix.mtx(\\.gz)?$", 
                             recursive = TRUE, 
                             full.names = TRUE)
+
 
   if (length(matrix_file) > 0) {
     # Get the directory name containing that file
@@ -35,9 +36,15 @@ for (s in sample_dirs) {
     message("Success: Found 10x data for ", donor_id, " in: ", target_dir)
     
     counts <- Read10X(data.dir = target_dir)
-    seurat_list[[donor_id]] <- CreateSeuratObject(counts = counts, project = donor_id)
+
+    obj <- CreateSeuratObject(counts = counts, project = donor_id)
+    
+    # OPTIONAL: Explicitly add a donor column to be safe
+    obj$sample <- donor_id
+    
+    seurat_list[[donor_id]] <- obj
   } else {
-    warning("Failure: Could not find matrix.mtx.gz inside ", d)
+    warning("Failure: Could not find matrix.mtx.gz inside ", s)
   }
 }
 

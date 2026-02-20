@@ -11,10 +11,9 @@ import argparse
 # res is the resolution string (e.g., "RNA_snn_res.0.6") the output of pikc_resolution script.
 parser = argparse.ArgumentParser()
 parser.add_argument('--input_dir', help="Path to the input marker file")
-parser.add_argument('--res', help="The picked resolution by pick_resolution script")
 parser.add_argument('--tissue', help="Type of tissue (e.g., PBMC, brain, etc.)")
 parser.add_argument('--species', help="Species (e.g., Human, Mouse)")
-parser.add_argument('--output', help="Path where the result should be saved")
+parser.add_argument('--out_dir', help="Path where the result should be saved")
 args = parser.parse_args()
 
 
@@ -47,16 +46,11 @@ def annotate_cell_type(markers, species, tissue):
     
     return response.choices[0].message.content
 
-with open(args.res, 'r') as file:
-    content = file.read().strip()
-    resollution = content.split("res.")[-1]
-#print(f'The selected resolution: {resollution}')
 
+markers_df = pd.read_csv(args.input_dir)
+file_name = os.path.basename(args.input_dir).replace(".csv", "")
 
-top_markers_dir = f"{args.input_dir}/Top_10_markers_res_{resollution}.csv"
-markers_df = pd.read_csv(top_markers_dir)
-
-with open(f"{args.output}/annotated_cell_types_{resollution}.txt", 'w') as f:
+with open(f"{args.out_dir}/annotated_cell_types{file_name}.txt", 'w') as f:
     for name, group in markers_df.groupby('cluster'):
         print(f"Cluster number: {name}")
         #print(group)
