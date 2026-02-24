@@ -1,9 +1,9 @@
-# scGPT-Flow
+# GPT-sc-pipeline
 
 A scalable Nextflow pipeline for staging single-cell genomic data to AWS S3 and performing integrated Seurat analysis.
 
 ## 📌 Overview
-`scGPT-Flow` automates the heavy lifting of single-cell data management. It processes raw data links, handles secure cloud uploads, and aggregates multi-sample datasets into a structured format ready for R/Seurat workflows.
+`GPT-sc-pipeline` automates the heavy lifting of single-cell data management. It processes raw data links, handles secure cloud uploads, and aggregates multi-sample datasets into a structured format ready for R/Seurat workflows.
 
 ## 🧬 Key Features
 * **Automated Data Staging:** A robust Python-based module to download, verify, and upload raw matrix links to S3 buckets.

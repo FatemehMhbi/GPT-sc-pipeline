@@ -27,7 +27,6 @@ dependencies:
   - r-cluster
   - r-flexmix
   - r-harmony
-  - bioconductor-miqc
   - bioconductor-biocparallel
   - bioconductor-singlecellexperiment
   - bioconductor-summarizedexperiment

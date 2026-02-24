@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 library(Seurat)
-library(optparse)
+library(optparse) 
 
 # This script reads in the raw count matrices from multiple samples
 # The input directory should contain subdirectories for each sample, and within those, 
@@ -39,7 +39,7 @@ for (s in sample_dirs) {
 
     obj <- CreateSeuratObject(counts = counts, project = donor_id)
     
-    # OPTIONAL: Explicitly add a donor column to be safe
+    # add a sample column to be safe
     obj$sample <- donor_id
     
     seurat_list[[donor_id]] <- obj

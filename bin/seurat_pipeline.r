@@ -6,9 +6,8 @@ library(tidyr)
 library(harmony)
 library(Matrix)
 library(optparse)
- library(mclust)
+library(mclust)
 library(flexmix)
-
 
 
 # Function to identify markers for each cluster at different resolutions and save the results as CSV files
@@ -113,7 +112,7 @@ process_raw_counts <- function(data_dir, results_dir) {
     # Define your thresholds
     min_counts <- 500  # Remove empty droplets/debris
     # Use median + 3*MAD to remove extreme outliers/doublets
-    max_counts <- median(obj$nCount_RNA) + 3 * mad(obj$nCount_RNA) # Remove extreme outliers/doublets
+    max_counts <- median(obj$nCount_RNA) + 3 * mad(obj$nCount_RNA) 
 
     # Extract metadata and handle potential scaling issues
     # Mclust works better if the features are somewhat comparable in scale
@@ -230,9 +229,6 @@ seurat_pipeline_with_harmony <- function(data_dir, results_dir) {
         seurat_obj_filtered, 
         reduction = "harmony", 
         dims = pc_dims)
-
-    #seurat_obj_filtered <- identify_clusters_and_visualize_umaps(seurat_obj_filtered, results_dir, seq(0.1, 1.0, by = 0.1)) %>% 
-    #    identify_and_save_markers(results_dir, seq(0.1, 1.0, by = 0.1))
 
     seurat_obj_filtered <- identify_clusters_and_visualize_umaps(
         seurat_obj_filtered, 

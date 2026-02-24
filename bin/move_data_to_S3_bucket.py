@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import argparse
 from itertools import repeat
 
-load_dotenv()
+load_dotenv() # Load AWS credentials and bucket name from .env file
 
 s3 = boto3.client(
     's3',

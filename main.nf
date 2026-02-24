@@ -5,7 +5,6 @@ params.tissue = "unknown"
 params.species = "unknown"
 params.outdir = "${launchDir}/results/${params.project_name}"
 
-// 1. Set a default value, but this gets overwritten by your command line input
 params.links_file = "" 
 
 process PREP_DATA {
